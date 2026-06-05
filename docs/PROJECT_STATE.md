@@ -917,6 +917,7 @@ Arquivos canonicos:
 - `docs/ARCHITECTURE_TREE.md`
 - `docs/AI_OPERATING_RULES.md`
 - `docs/ACCEPTANCE_CRITERIA.md`
+- `docs/GIT_BRANCH_WORKFLOW.md`
 - `docs/AI_FLOW_VALIDATION_REPORT.md`
 - `docs/ROADMAP.md`
 - `docs/RUNBOOK.md`
