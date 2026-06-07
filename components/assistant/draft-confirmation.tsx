@@ -72,7 +72,7 @@ export function DraftConfirmation({ draft }: DraftConfirmationProps) {
   }
 
   return (
-    <article className="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm">
+    <article className="rounded-lg border border-[var(--border)] bg-white p-4 shadow-[var(--card-shadow)]">
       <div className="mb-4">{renderDraftSummary(draft)}</div>
 
       {state.message ? (
@@ -87,11 +87,11 @@ export function DraftConfirmation({ draft }: DraftConfirmationProps) {
 
       <form className="grid gap-3 sm:grid-cols-[1fr_auto]" onSubmit={handleSubmit}>
         <input name="draft" type="hidden" value={JSON.stringify(draft)} />
-        <p className="text-sm leading-6 text-zinc-600">
+        <p className="text-sm leading-6 text-[var(--muted)]">
           Nada será salvo antes de clicar no botão de confirmação.
         </p>
         <button
-          className="min-h-12 rounded-lg bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:cursor-not-allowed disabled:bg-zinc-400"
+          className="min-h-12 rounded-lg bg-[var(--primary)] px-4 py-3 text-sm font-bold text-white shadow-[var(--card-shadow)] transition hover:bg-[var(--primary-medium)] disabled:cursor-not-allowed disabled:bg-slate-400"
           disabled={pending || state.status === "success"}
           type="submit"
         >
@@ -235,9 +235,9 @@ function renderDraftSummary(draft: AssistantDraft) {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3">
-      <dt className="text-xs font-medium text-zinc-500">{label}</dt>
-      <dd className="mt-1 break-words font-semibold text-zinc-950">{value}</dd>
+    <div className="rounded-lg bg-[var(--background)] p-3">
+      <dt className="text-xs font-medium text-[var(--muted)]">{label}</dt>
+      <dd className="mt-1 break-words font-semibold text-[var(--primary)]">{value}</dd>
     </div>
   );
 }

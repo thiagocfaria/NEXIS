@@ -990,6 +990,43 @@ Nao executado nesta rodada (apenas docs/config):
 - `npm run test` nao foi executado; codigo de negocio nao foi alterado; ultima execucao passou com 481 testes.
 - `npm run e2e` nao foi executado; UI nao foi alterada.
 
+## Atualizacao - Migracao Visual de Transacoes, Relatorios e Estoque Baixo
+
+Data: 2026-06-07.
+
+Escopo visual concluido:
+
+- `/sales` migrada para os tokens e componentes visuais atuais do NEXIS;
+- `/purchases` migrada mantendo compra por unidade e por embalagem;
+- `/expenses` migrada com resumo visual de despesas confirmadas e pendentes;
+- `/reports` criada com indicadores reais de hoje e do mes, alem de ranking real de produtos;
+- `/low-stock` criada com produtos ativos abaixo do minimo, nivel de criticidade e atalho para reposicao;
+- dashboard passou a ligar diretamente para Relatorios e Estoque baixo;
+- novo `PageHeader` compartilhado em `components/navigation/page-header.tsx`;
+- formularios e listas transacionais foram reestilizados sem alterar Server Actions, Zod, Prisma ou regras financeiras;
+- o bundle `Design System Layout_atualizado/` foi excluido de ESLint e TypeScript por ser somente referencia Vite, nao parte do app Next.js.
+
+Regras preservadas:
+
+- venda continua baixando estoque somente pela action existente;
+- compra continua aumentando estoque somente pela action existente;
+- despesa pendente continua fora do lucro liquido;
+- relatorios usam `getDashboardSummary()` e `summarizeTopProducts()`;
+- estoque baixo usa a regra deterministica `hasLowStock()`;
+- nenhum dado mockado do bundle visual foi levado para as rotas reais.
+
+Validacao executada nesta etapa:
+
+- `npm run lint`: passou;
+- lint direcionado das rotas e componentes alterados: passou;
+- `git diff --check`: passou;
+- `npm run test`: 31 arquivos e 475 testes passaram; 2 suites nao iniciaram porque o Prisma Client local nao existe;
+- `npm run db:generate`: bloqueado por certificado local, com erro `self-signed certificate in certificate chain` ao acessar `binaries.prisma.sh`;
+- `npm run typecheck`: bloqueado pela ausencia de `.prisma/client`;
+- `npm run build`: bloqueado porque um processo local manteve `.next/ux-dev.stderr.log` aberto (`EBUSY`);
+- smoke HTTP em `/sales`, `/purchases`, `/expenses`, `/reports` e `/low-stock`: rotas reconhecidas, mas responderam 500 porque o servidor tambem nao encontrou `.prisma/client/default`;
+- E2E nao executado porque a geracao do Prisma Client e requisito do servidor de teste.
+
 ## Proxima Ordem Recomendada
 
 1. Validar demo no celular real pelo link publico e instalar como PWA.

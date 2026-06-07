@@ -47,10 +47,10 @@ export function ExpenseForm({ action, today }: ExpenseFormProps) {
       />
 
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="grid gap-2 text-sm font-semibold text-zinc-800">
+        <label className="grid gap-2 text-sm font-bold text-[var(--primary)]">
           Categoria
           <select
-            className="min-h-12 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-base font-medium text-zinc-950 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+            className="min-h-12 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-base font-semibold text-[var(--foreground)] shadow-sm focus:border-[var(--primary-light)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-light)]/20"
             defaultValue="OTHER"
             name="category"
           >
@@ -73,10 +73,10 @@ export function ExpenseForm({ action, today }: ExpenseFormProps) {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="grid gap-2 text-sm font-semibold text-zinc-800">
+        <label className="grid gap-2 text-sm font-bold text-[var(--primary)]">
           Data
           <input
-            className="min-h-12 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-base font-medium text-zinc-950 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+            className="min-h-12 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-base font-semibold text-[var(--foreground)] shadow-sm focus:border-[var(--primary-light)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-light)]/20"
             defaultValue={today}
             name="paidAt"
             type="date"
@@ -84,9 +84,9 @@ export function ExpenseForm({ action, today }: ExpenseFormProps) {
           <InlineError message={state.fieldErrors?.paidAt} />
         </label>
 
-        <label className="flex min-h-12 items-center gap-3 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm font-semibold text-zinc-800 shadow-sm">
+        <label className="flex min-h-12 items-center gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-sm font-bold text-[var(--primary)] shadow-sm">
           <input
-            className="h-5 w-5 rounded border-zinc-300 text-emerald-700 focus:ring-emerald-500"
+            className="h-5 w-5 rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--primary-light)]"
             defaultChecked
             name="confirmed"
             type="checkbox"
@@ -97,7 +97,7 @@ export function ExpenseForm({ action, today }: ExpenseFormProps) {
       </div>
 
       <button
-        className="min-h-12 rounded-lg bg-emerald-700 px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:cursor-not-allowed disabled:bg-zinc-400"
+        className="min-h-12 rounded-lg bg-[var(--primary)] px-4 py-3 text-base font-bold text-white shadow-[var(--card-shadow-strong)] transition hover:bg-[var(--primary-medium)] disabled:cursor-not-allowed disabled:bg-[var(--muted)]"
         disabled={pending}
         type="submit"
       >
@@ -123,11 +123,11 @@ function TextInput({
   placeholder: string;
 }) {
   return (
-    <label className="grid gap-2 text-sm font-semibold text-zinc-800">
+    <label className="grid gap-2 text-sm font-bold text-[var(--primary)]">
       {label}
       <input
         autoComplete={autoComplete}
-        className="min-h-12 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-base font-medium text-zinc-950 shadow-sm placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+        className="min-h-12 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-base font-semibold text-[var(--foreground)] shadow-sm placeholder:text-[var(--muted)] focus:border-[var(--primary-light)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-light)]/20"
         inputMode={inputMode}
         name={name}
         placeholder={placeholder}
@@ -145,8 +145,8 @@ function FieldMessage({ message, status }: { message: string; status: ExpenseFor
 
   const tone =
     status === "success"
-      ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-      : "border-rose-200 bg-rose-50 text-rose-800";
+      ? "border-[var(--success)]/20 bg-[var(--success-soft)] text-[var(--success)]"
+      : "border-[var(--danger)]/20 bg-[var(--danger-soft)] text-[var(--danger)]";
 
   return <p className={`rounded-lg border px-3 py-2 text-sm font-semibold ${tone}`}>{message}</p>;
 }
@@ -156,5 +156,5 @@ function InlineError({ message }: { message?: string }) {
     return null;
   }
 
-  return <span className="text-sm font-medium text-rose-700">{message}</span>;
+  return <span className="text-sm font-medium text-[var(--danger)]">{message}</span>;
 }

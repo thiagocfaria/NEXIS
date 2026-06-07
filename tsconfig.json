@@ -39,6 +39,7 @@
     ".next-analyze/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "Design System Layout_atualizado"
   ]
 }

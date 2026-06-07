@@ -20,9 +20,9 @@ type PurchaseListProps = {
 export function PurchaseList({ purchases }: PurchaseListProps) {
   if (purchases.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-300 bg-white p-6 text-center text-zinc-600">
-        <PackageOpen aria-hidden="true" className="mx-auto h-9 w-9 text-zinc-400" />
-        <p className="mt-3 text-sm font-semibold text-zinc-950">Nenhuma compra cadastrada</p>
+      <div className="rounded-lg border border-dashed border-[var(--border)] bg-white p-6 text-center text-[var(--muted)]">
+        <PackageOpen aria-hidden="true" className="mx-auto size-9 text-[var(--primary-medium)]" />
+        <p className="mt-3 text-sm font-bold text-[var(--primary)]">Nenhuma compra cadastrada</p>
         <p className="mt-1 text-sm">As compras salvas aparecem aqui com produto, quantidade e custo.</p>
       </div>
     );
@@ -31,17 +31,17 @@ export function PurchaseList({ purchases }: PurchaseListProps) {
   return (
     <div className="grid gap-3">
       {purchases.map((purchase) => (
-        <article className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm" key={purchase.id}>
+        <article className="rounded-lg border border-[var(--border)] bg-white p-4 shadow-[var(--card-shadow)]" key={purchase.id}>
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <h3 className="break-words text-lg font-semibold tracking-normal text-zinc-950">
+              <h3 className="break-words text-base font-extrabold text-[var(--primary)]">
                 {purchase.productName}
               </h3>
-              <p className="mt-1 text-sm text-zinc-600">
+              <p className="mt-1 text-xs text-[var(--muted)]">
                 {formatQuantity(purchase.quantity)} {productUnitShortLabels[purchase.unit]} comprados
               </p>
             </div>
-            <span className="shrink-0 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
+            <span className="shrink-0 rounded-md bg-[#eceeff] px-2.5 py-1 text-[10px] font-extrabold uppercase text-[var(--primary-medium)]">
               Compra
             </span>
           </div>
@@ -60,9 +60,9 @@ export function PurchaseList({ purchases }: PurchaseListProps) {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg bg-zinc-50 px-3 py-2">
-      <p className="text-xs font-medium text-zinc-500">{label}</p>
-      <p className="mt-1 break-words text-sm font-semibold text-zinc-950">{value}</p>
+    <div className="rounded-lg bg-[var(--surface-soft)] px-3 py-2">
+      <p className="text-xs font-medium text-[var(--muted)]">{label}</p>
+      <p className="mt-1 break-words text-sm font-bold text-[var(--foreground)]">{value}</p>
     </div>
   );
 }

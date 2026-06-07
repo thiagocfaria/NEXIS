@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NEXIS: preparar branch code_dfcl",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\git\\prepare-code-dfcl.ps1"
+      ],
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "NEXIS: verificar branch atual",
+      "type": "shell",
+      "command": "git branch --show-current",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "NEXIS: validar UX antes do commit",
+      "type": "shell",
+      "command": "npm run lint && npm run typecheck && npm run test && git diff --check",
+      "problemMatcher": [],
+      "group": "test"
+    }
+  ]
+}

@@ -112,15 +112,23 @@ export function ChatThread({ audioInputEnabled }: ChatThreadProps) {
       <section
         aria-label="Conversa com NEXIS"
         aria-live="polite"
-        className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden overscroll-contain pr-1"
+        className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden overscroll-contain"
         data-testid="assistant-message-list"
         ref={messageListRef}
       >
-        <div className="grid gap-3 py-2 pb-4">
+        <div className="grid gap-3 py-4">
+          {conversation.length === 0 ? (
+            <div className="flex max-w-[94%] items-start gap-2" data-testid="assistant-message">
+              <AssistantAvatar />
+              <article className="min-w-0 rounded-[18px_18px_18px_4px] border border-[var(--border)] bg-white px-4 py-3 text-sm leading-6 text-[var(--primary)] shadow-[var(--card-shadow)]">
+                Ola! Posso consultar seus numeros ou preparar um rascunho de venda, compra, despesa e produto.
+              </article>
+            </div>
+          ) : null}
           {conversation.map((item) =>
             item.role === "user" ? (
               <article
-                className="ml-auto max-w-[88%] whitespace-pre-wrap break-words rounded-lg bg-zinc-900 px-4 py-3 text-sm font-medium leading-6 text-white shadow-sm"
+                className="ml-auto max-w-[84%] whitespace-pre-wrap break-words rounded-[18px_18px_4px_18px] bg-[var(--primary)] px-4 py-3 text-sm font-medium leading-6 text-white shadow-[var(--card-shadow)]"
                 data-testid="user-message"
                 key={item.id}
               >
@@ -136,7 +144,7 @@ export function ChatThread({ audioInputEnabled }: ChatThreadProps) {
       </section>
 
       <div
-        className="sticky bottom-0 shrink-0 border-t border-zinc-200 bg-[#f6f7f4]/95 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 backdrop-blur"
+        className="sticky bottom-0 shrink-0 border-t border-[var(--border)] bg-white/95 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 backdrop-blur"
         data-testid="assistant-composer"
       >
         <MessageInput audioInputEnabled={audioInputEnabled} onSend={handleSend} pending={pending} />
@@ -150,7 +158,7 @@ function AssistantMessage({ state }: { state: AssistantActionState }) {
     return (
       <div className="flex max-w-[94%] items-start gap-2" data-testid="assistant-message">
         <AssistantAvatar />
-        <article className="min-w-0 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold leading-6 text-amber-900 shadow-sm">
+        <article className="min-w-0 rounded-[18px_18px_18px_4px] border border-[var(--warning)]/20 bg-[var(--warning-soft)] px-4 py-3 text-sm font-semibold leading-6 text-[var(--warning)] shadow-[var(--card-shadow)]">
           {state.message}
         </article>
       </div>
@@ -162,7 +170,7 @@ function AssistantMessage({ state }: { state: AssistantActionState }) {
       <AssistantAvatar />
       <div className="grid min-w-0 flex-1 gap-2">
         {state.status === "draft" ? (
-          <p className="rounded-lg border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold leading-6 text-zinc-800 shadow-sm">
+          <p className="rounded-[18px_18px_18px_4px] border border-[var(--border)] bg-white px-4 py-3 text-sm font-semibold leading-6 text-[var(--primary)] shadow-[var(--card-shadow)]">
             {state.message}
           </p>
         ) : null}
@@ -177,7 +185,7 @@ function AssistantPendingMessage() {
   return (
     <div className="flex max-w-[94%] items-start gap-2" data-testid="assistant-pending" role="status">
       <AssistantAvatar />
-      <article className="min-w-0 rounded-lg border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold leading-6 text-zinc-700 shadow-sm">
+      <article className="min-w-0 rounded-[18px_18px_18px_4px] border border-[var(--border)] bg-white px-4 py-3 text-sm font-semibold leading-6 text-[var(--muted)] shadow-[var(--card-shadow)]">
         NEXIS está analisando...
       </article>
     </div>
@@ -188,7 +196,7 @@ function AssistantAvatar() {
   return (
     <span
       aria-hidden="true"
-      className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-800"
+      className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--primary)] text-xs font-black text-[var(--accent)] shadow-[var(--card-shadow)]"
     >
       N
     </span>

@@ -12,7 +12,7 @@ type QuickActionButtonProps = {
 };
 
 const buttonClassName =
-  "group flex min-h-20 touch-manipulation items-center gap-3 rounded-lg border-2 px-4 py-4 text-left shadow-sm transition active:translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700";
+  "group flex min-h-20 touch-manipulation items-center gap-3 rounded-lg border px-3 py-3 text-left shadow-[var(--card-shadow)] transition active:translate-y-px";
 
 export function QuickActionButton({
   href,
@@ -45,7 +45,7 @@ export function QuickActionButton({
   return (
     <Link
       aria-label={label}
-      className={`${buttonClassName} cursor-pointer text-zinc-950 ${className}`}
+      className={`${buttonClassName} cursor-pointer text-[var(--primary)] ${className}`}
       href={href}
       prefetch
     >
@@ -53,12 +53,12 @@ export function QuickActionButton({
         <Icon aria-hidden="true" className="h-5 w-5 shrink-0" />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block text-base font-semibold leading-6">{label}</span>
-        <span className="mt-1 block text-sm font-medium leading-5 text-zinc-700">{description}</span>
+        <span className="block text-sm font-bold leading-5">{label}</span>
+        <span className="mt-1 hidden text-xs font-medium leading-4 opacity-70 sm:block">{description}</span>
       </span>
       <ChevronRight
         aria-hidden="true"
-        className="h-5 w-5 shrink-0 text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-zinc-800"
+        className="hidden h-4 w-4 shrink-0 opacity-50 transition group-hover:translate-x-0.5 lg:block"
       />
     </Link>
   );

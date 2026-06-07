@@ -21,16 +21,16 @@ type ProductListProps = {
 export function ProductList({ products }: ProductListProps) {
   if (products.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-300 bg-white p-6 text-center text-zinc-600">
-        <PackageOpen aria-hidden="true" className="mx-auto h-9 w-9 text-zinc-400" />
-        <p className="mt-3 text-sm font-semibold text-zinc-950">Nenhum produto cadastrado</p>
+      <div className="rounded-lg border border-dashed border-[var(--border)] bg-white p-6 text-center text-[var(--muted)]">
+        <PackageOpen aria-hidden="true" className="mx-auto h-9 w-9 text-[var(--purple)]" />
+        <p className="mt-3 text-sm font-bold text-[var(--primary)]">Nenhum produto cadastrado</p>
         <p className="mt-1 text-sm">Salve o primeiro produto para comecar a controlar seu estoque.</p>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-3">
+    <div className="grid gap-2.5">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

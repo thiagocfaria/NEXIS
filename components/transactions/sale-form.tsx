@@ -80,10 +80,10 @@ export function SaleForm({ action, products }: SaleFormProps) {
     <form className="mt-4 grid gap-4" onSubmit={handleSubmit}>
       <FieldMessage message={state.message} status={state.status} />
 
-      <label className="grid gap-2 text-sm font-semibold text-zinc-800">
+      <label className="grid gap-2 text-sm font-bold text-[var(--primary)]">
         Produto
         <select
-          className="min-h-12 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-base font-medium text-zinc-950 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+          className="min-h-12 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-base font-semibold text-[var(--foreground)] shadow-sm focus:border-[var(--primary-light)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-light)]/20"
           name="productId"
           onChange={(event) => {
             const productId = event.target.value;
@@ -104,7 +104,7 @@ export function SaleForm({ action, products }: SaleFormProps) {
           ))}
         </select>
         {selectedProduct ? (
-          <span className="text-sm font-medium text-zinc-600">
+          <span className="rounded-lg border border-[var(--success)]/20 bg-[var(--success-soft)] px-3 py-2 text-sm font-semibold text-[var(--success)]">
             Preço cadastrado: {moneyInputValue(selectedProduct.salePriceCents)}
           </span>
         ) : null}
@@ -132,18 +132,18 @@ export function SaleForm({ action, products }: SaleFormProps) {
         />
       </div>
 
-      <p className="text-sm leading-6 text-zinc-600">
+      <p className="text-xs leading-5 text-[var(--muted)]">
         Se deixar como está, usamos o preço cadastrado do produto. Você pode alterar só para esta venda.
       </p>
 
       {salePreview ? (
-        <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3">
+        <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-4">
           <dl className="grid grid-cols-2 gap-3 text-sm">
             <PreviewMetric label="Lucro estimado" value={formatCentsToBRL(salePreview.grossProfitCents)} />
             <PreviewMetric label="Margem estimada" value={formatPercent(salePreview.marginPercent)} />
           </dl>
           {salePreview.belowCost ? (
-            <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-950">
+            <p className="mt-3 rounded-lg border border-[var(--warning)]/25 bg-[var(--warning-soft)] px-3 py-2 text-sm font-semibold text-[var(--warning)]">
               Atenção: preço abaixo do custo para você.
             </p>
           ) : null}
@@ -151,13 +151,13 @@ export function SaleForm({ action, products }: SaleFormProps) {
       ) : null}
 
       {products.length === 0 ? (
-        <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-900">
+        <p className="rounded-lg border border-[var(--warning)]/25 bg-[var(--warning-soft)] px-3 py-2 text-sm font-semibold text-[var(--warning)]">
           Cadastre um produto ativo antes de salvar venda.
         </p>
       ) : null}
 
       <button
-        className="min-h-12 rounded-lg bg-emerald-700 px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:cursor-not-allowed disabled:bg-zinc-400"
+        className="min-h-12 rounded-lg bg-[var(--primary)] px-4 py-3 text-base font-bold text-white shadow-[var(--card-shadow-strong)] transition hover:bg-[var(--primary-medium)] disabled:cursor-not-allowed disabled:bg-[var(--muted)]"
         disabled={pending || products.length === 0}
         type="submit"
       >
@@ -185,10 +185,10 @@ function TextInput({
   value?: string;
 }) {
   return (
-    <label className="grid gap-2 text-sm font-semibold text-zinc-800">
+    <label className="grid gap-2 text-sm font-bold text-[var(--primary)]">
       {label}
       <input
-        className="min-h-12 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-base font-medium text-zinc-950 shadow-sm placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+        className="min-h-12 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-base font-semibold text-[var(--foreground)] shadow-sm placeholder:text-[var(--muted)] focus:border-[var(--primary-light)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-light)]/20"
         inputMode={inputMode}
         name={name}
         onChange={onChange ? (event) => onChange(event.target.value) : undefined}
@@ -208,8 +208,8 @@ function FieldMessage({ message, status }: { message: string; status: SaleFormAc
 
   const tone =
     status === "success"
-      ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-      : "border-rose-200 bg-rose-50 text-rose-800";
+      ? "border-[var(--success)]/20 bg-[var(--success-soft)] text-[var(--success)]"
+      : "border-[var(--danger)]/20 bg-[var(--danger-soft)] text-[var(--danger)]";
 
   return (
     <p
@@ -227,14 +227,14 @@ function InlineError({ message }: { message?: string }) {
     return null;
   }
 
-  return <span className="text-sm font-medium text-rose-700">{message}</span>;
+  return <span className="text-sm font-medium text-[var(--danger)]">{message}</span>;
 }
 
 function PreviewMetric({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs font-medium text-zinc-500">{label}</dt>
-      <dd className="mt-1 break-words text-sm font-semibold text-zinc-950">{value}</dd>
+      <dt className="text-xs font-medium text-[var(--muted)]">{label}</dt>
+      <dd className="mt-1 break-words text-sm font-bold text-[var(--primary)]">{value}</dd>
     </div>
   );
 }

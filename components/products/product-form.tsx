@@ -84,10 +84,10 @@ export function ProductForm({ action, initialValues, product, submitLabel }: Pro
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <label className="grid gap-2 text-sm font-semibold text-zinc-800">
+        <label className="grid gap-2 text-sm font-bold text-[var(--muted)]">
           Unidade
           <select
-            className="min-h-12 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-base font-medium text-zinc-950 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+            className="min-h-12 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-base font-medium text-[var(--primary)] focus:border-[var(--primary-light)] focus:outline-none"
             defaultValue={product?.unit ?? initialValues?.unit ?? "UNIT"}
             name="unit"
           >
@@ -119,13 +119,13 @@ export function ProductForm({ action, initialValues, product, submitLabel }: Pro
 
       <div className="grid gap-4 md:grid-cols-2">
         {product ? (
-          <div className="grid gap-2 text-sm font-semibold text-zinc-800">
+          <div className="grid gap-2 text-sm font-bold text-[var(--muted)]">
             <input name="initialStock" type="hidden" value={quantityInputValue(product.currentStock) ?? "0"} />
             <span>Estoque atual</span>
-            <p className="min-h-12 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-3 text-base font-semibold text-zinc-950">
+            <p className="min-h-12 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-3 text-base font-semibold text-[var(--primary)]">
               {quantityInputValue(product.currentStock) ?? "0"}
             </p>
-            <p className="text-sm font-medium leading-6 text-zinc-600">
+            <p className="text-sm font-medium leading-6 text-[var(--muted)]">
               Estoque atual nao e alterado neste cadastro. Use compras, vendas, perdas ou cancelamentos.
             </p>
             <InlineError message={state.fieldErrors?.initialStock} />
@@ -151,8 +151,8 @@ export function ProductForm({ action, initialValues, product, submitLabel }: Pro
       </div>
 
       {!product ? (
-        <fieldset className="grid gap-3 rounded-lg border border-zinc-200 p-3">
-          <legend className="px-1 text-sm font-semibold text-zinc-800">Entrada por embalagem</legend>
+        <fieldset className="grid gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3">
+          <legend className="px-1 text-sm font-bold text-[var(--primary)]">Entrada por embalagem</legend>
           <div className="grid gap-4 md:grid-cols-3">
             <TextInput
               error={state.fieldErrors?.packageQuantity}
@@ -180,7 +180,7 @@ export function ProductForm({ action, initialValues, product, submitLabel }: Pro
       ) : null}
 
       <button
-        className="min-h-12 rounded-lg bg-emerald-700 px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:cursor-not-allowed disabled:bg-zinc-400"
+        className="min-h-12 rounded-lg bg-[var(--primary)] px-4 py-3 text-base font-bold text-white shadow-[var(--card-shadow)] transition hover:bg-[var(--primary-medium)] disabled:cursor-not-allowed disabled:bg-slate-400"
         disabled={pending}
         type="submit"
       >
@@ -208,11 +208,11 @@ function TextInput({
   inputMode?: "decimal";
 }) {
   return (
-    <label className="grid gap-2 text-sm font-semibold text-zinc-800">
+    <label className="grid gap-2 text-sm font-bold text-[var(--muted)]">
       {label}
       <input
         autoComplete={autoComplete}
-        className="min-h-12 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-base font-medium text-zinc-950 shadow-sm placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+        className="min-h-12 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-base font-medium text-[var(--primary)] placeholder:text-[var(--muted)] focus:border-[var(--primary-light)] focus:outline-none"
         defaultValue={defaultValue}
         inputMode={inputMode}
         name={name}

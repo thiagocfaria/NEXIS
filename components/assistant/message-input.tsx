@@ -39,13 +39,12 @@ export function MessageInput({ audioInputEnabled, onSend, pending }: MessageInpu
   }
 
   return (
-    <form className="rounded-lg border border-zinc-200 bg-white p-2 shadow-sm" onSubmit={handleSubmit}>
+    <form className="bg-white pb-1" onSubmit={handleSubmit}>
       {audioInputEnabled ? (
         <AudioRecorder onTranscript={setMessage} />
       ) : (
-        <section aria-label="Modo texto-only" className="mb-2 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2">
-          <p className="text-sm font-semibold text-sky-950">Demo por texto</p>
-          <p className="mt-1 text-xs leading-5 text-sky-900 sm:text-sm">
+        <section aria-label="Modo texto-only" className="mb-2 rounded-lg bg-[var(--surface-soft)] px-3 py-2">
+          <p className="text-xs font-semibold leading-5 text-[var(--muted)]">
             Digite perguntas ou lançamentos. Nada é salvo sem confirmação.
           </p>
         </section>
@@ -56,7 +55,7 @@ export function MessageInput({ audioInputEnabled, onSend, pending }: MessageInpu
       </label>
       <div className="flex items-end gap-2">
         <textarea
-          className="min-h-12 max-h-32 flex-1 resize-none rounded-lg border border-zinc-300 bg-white px-3 py-3 text-base font-medium leading-6 text-zinc-950 shadow-sm placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+          className="min-h-12 max-h-32 flex-1 resize-none rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-base font-medium leading-6 text-[var(--primary)] placeholder:text-[var(--muted)] focus:border-[var(--primary-light)] focus:outline-none"
           id="assistant-message"
           name="message"
           onKeyDown={handleKeyDown}
@@ -68,7 +67,7 @@ export function MessageInput({ audioInputEnabled, onSend, pending }: MessageInpu
         />
         <button
           aria-label="Enviar para NEXIS"
-          className="flex min-h-12 min-w-12 items-center justify-center gap-2 rounded-lg bg-emerald-700 px-3 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:cursor-not-allowed disabled:bg-zinc-400 sm:min-w-28 sm:px-4"
+          className="flex min-h-12 min-w-12 items-center justify-center gap-2 rounded-lg bg-[var(--primary)] px-3 py-3 text-sm font-bold text-white shadow-[var(--card-shadow)] transition hover:bg-[var(--primary-medium)] disabled:cursor-not-allowed disabled:bg-slate-400 sm:min-w-28 sm:px-4"
           disabled={pending}
           type="submit"
         >

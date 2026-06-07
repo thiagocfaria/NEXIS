@@ -1,3 +1,4 @@
+import { AlertTriangle } from "lucide-react";
 import type { DashboardLowStockProduct } from "@/lib/dashboard/summary";
 
 type LowStockListProps = {
@@ -7,20 +8,25 @@ type LowStockListProps = {
 export function LowStockList({ products }: LowStockListProps) {
   if (products.length === 0) {
     return (
-      <div className="rounded-lg border border-zinc-200 bg-white p-4 text-sm font-medium text-zinc-600 shadow-sm">
+      <div className="rounded-lg border border-[var(--border)] bg-white p-4 text-sm font-medium text-[var(--muted)] shadow-[var(--card-shadow)]">
         Nenhum produto acabando
       </div>
     );
   }
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
+    <div className="grid gap-2.5 sm:grid-cols-2">
       {products.map((product) => (
-        <article className="rounded-lg border border-amber-200 bg-amber-50 p-4 shadow-sm" key={product.id}>
-          <p className="text-sm font-semibold text-amber-950">{product.name}</p>
-          <p className="mt-2 text-sm text-amber-900">
-            Estoque {formatQuantity(product.currentStock)} de minimo {formatQuantity(product.minimumStock)}
-          </p>
+        <article className="flex items-center gap-3 rounded-lg border border-[var(--border)] bg-white p-3.5 shadow-[var(--card-shadow)]" key={product.id}>
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[var(--warning-soft)] text-[var(--warning)]">
+            <AlertTriangle className="size-[18px]" />
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-bold text-[var(--primary)]">{product.name}</p>
+            <p className="mt-1 text-xs text-[var(--muted)]">
+              Estoque {formatQuantity(product.currentStock)} de minimo {formatQuantity(product.minimumStock)}
+            </p>
+          </div>
         </article>
       ))}
     </div>

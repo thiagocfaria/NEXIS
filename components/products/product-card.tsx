@@ -18,30 +18,30 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <article
-      className={`rounded-lg border bg-white p-4 shadow-sm ${
-        lowStock ? "border-amber-300 ring-2 ring-amber-100" : "border-zinc-200"
+      className={`rounded-lg border bg-white p-4 shadow-[var(--card-shadow)] ${
+        lowStock ? "border-[var(--warning)]/30" : "border-[var(--border)]"
       } ${product.active ? "" : "opacity-70"}`}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="break-words text-lg font-semibold tracking-normal text-zinc-950">{product.name}</h3>
+            <h3 className="break-words text-base font-extrabold text-[var(--primary)]">{product.name}</h3>
             {!product.active ? (
-              <span className="rounded-full bg-zinc-200 px-2 py-1 text-xs font-semibold text-zinc-700">Inativo</span>
+              <span className="rounded-md bg-[var(--surface-soft)] px-2 py-1 text-[10px] font-bold text-[var(--muted)]">Inativo</span>
             ) : null}
             {lowStock ? (
-              <span className="rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-900">
+              <span className="rounded-md bg-[var(--warning-soft)] px-2 py-1 text-[10px] font-bold text-[var(--warning)]">
                 Produto acabando
               </span>
             ) : null}
           </div>
-          <p className="mt-1 text-sm text-zinc-600">{product.category ?? "Sem categoria"}</p>
+          <p className="mt-1 text-xs text-[var(--muted)]">{product.category ?? "Sem categoria"}</p>
         </div>
         <form action={setProductActiveAction}>
           <input name="productId" type="hidden" value={product.id} />
           <input name="active" type="hidden" value={product.active ? "false" : "true"} />
           <button
-            className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-semibold text-zinc-800 shadow-sm transition hover:border-emerald-300 hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+            className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-sm font-semibold text-[var(--primary)]"
             type="submit"
           >
             {product.active ? (
@@ -61,9 +61,9 @@ export function ProductCard({ product }: ProductCardProps) {
         <Metric label="Estoque minimo" value={`${formatQuantity(product.minimumStock)} ${productUnitShortLabels[product.unit]}`} />
       </div>
 
-      <details className="mt-4 rounded-lg border border-zinc-200 bg-zinc-50 p-3">
-        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-zinc-900">
-          <Pencil aria-hidden="true" className="h-4 w-4 text-emerald-700" />
+      <details className="mt-4 rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3">
+        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-bold text-[var(--primary)]">
+          <Pencil aria-hidden="true" className="h-4 w-4 text-[var(--purple)]" />
           Editar produto
         </summary>
         <ProductForm action={updateProductAction} product={product} submitLabel="Salvar alteracoes" />
@@ -74,9 +74,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg bg-zinc-50 px-3 py-2">
-      <p className="text-xs font-medium text-zinc-500">{label}</p>
-      <p className="mt-1 break-words text-sm font-semibold text-zinc-950">{value}</p>
+    <div className="rounded-lg bg-[var(--background)] px-3 py-2">
+      <p className="text-xs font-medium text-[var(--muted)]">{label}</p>
+      <p className="mt-1 break-words text-sm font-bold text-[var(--primary)]">{value}</p>
     </div>
   );
 }
