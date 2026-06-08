@@ -117,8 +117,8 @@ O fallback rule-based deve cobrir o basico mesmo com `AI_ASSISTANT_ENABLED=false
 
 Detalhamento operacional:
 
-- `docs/ASSISTANT_OPERATIONAL_KNOWLEDGE.md`
-- `docs/ASSISTANT_INTELLIGENCE_CORPUS.md`
+- `private assistant operational notes (not versioned)`
+- `private assistant corpus (not versioned)`
 
 Nao implementado:
 
@@ -199,10 +199,10 @@ Estado atual:
 
 O assistant deve continuar passando no laboratorio humano antes de novas features:
 
-- `tests/ai/assistant-human-fuzz-corpus.test.ts`: frases de bebidas, espetinho, construcao, agro ficticio, produtos sensiveis ficticios, servicos, despesas, relatorios, ambiguidade e linguagem informal;
-- `tests/e2e/assistant-human-business-flow.spec.ts`: conversas completas A-G descritas em `docs/ASSISTANT_BUSINESS_SCENARIOS.md`.
+- `private assistant fuzz tests (not versioned)`: frases de bebidas, espetinho, construcao, agro ficticio, produtos sensiveis ficticios, servicos, despesas, relatorios, ambiguidade e linguagem informal;
+- `private assistant business flow E2E (not versioned)`: conversas completas A-G descritas em `private assistant business scenarios (not versioned)`.
 - `tests/e2e/assistant-commercial-units.spec.ts`: conversoes comerciais de kg/grama, grama, caixa com unidades internas e confirmacao antes de salvar.
-- `tests/e2e/assistant-required-business-scenarios.spec.ts`: conversa humanizada com perda e cancelamento por rascunho, confirmacao e conferencia em banco.
+- `private assistant required scenarios E2E (not versioned)`: conversa humanizada com perda e cancelamento por rascunho, confirmacao e conferencia em banco.
 
 Regras especificas:
 

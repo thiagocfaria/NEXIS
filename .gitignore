@@ -40,3 +40,18 @@ pnpm-debug.log*
 
 # Arquivos antigos/pesados fora do Git
 ARQUIVOS_MORTOS/
+
+# Base privada do assistant/IA: manter local, fora do GitHub
+PLANO_CADASTRO_PRODUTOS_IA.md
+docs/AI_FLOW_VALIDATION_REPORT.md
+docs/ASSISTANT_BUSINESS_SCENARIOS.md
+docs/ASSISTANT_HUMAN_CONVERSATION_AUDIT.md
+docs/ASSISTANT_HUMAN_FUZZ_REPORT.md
+docs/ASSISTANT_INTELLIGENCE_CORPUS.md
+docs/ASSISTANT_OPERATIONAL_KNOWLEDGE.md
+tests/ai/assistant-human-fuzz-corpus.test.ts
+tests/ai/assistant-required-business-scenarios.test.ts
+tests/ai/conversation-engine-corpus.test.ts
+tests/e2e/assistant-human-business-flow.spec.ts
+tests/e2e/assistant-human-conversation.spec.ts
+tests/e2e/assistant-required-business-scenarios.spec.ts

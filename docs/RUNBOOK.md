@@ -110,12 +110,8 @@ Regras:
 
 ## Laboratorio Humanizado Obrigatorio do Assistant
 
-Use somente dados ficticios. Antes de mexer no assistant, leia `REGRAS_INVARIANTES.md` e rode pelo menos a bateria focada:
-
-```bash
-npx vitest run tests/ai/assistant-required-business-scenarios.test.ts
-npx playwright test tests/e2e/assistant-required-business-scenarios.spec.ts
-```
+Use somente dados ficticios. Antes de mexer no assistant, leia `REGRAS_INVARIANTES.md`.
+As baterias humanizadas privadas do assistant ficam fora do GitHub e devem ser rodadas apenas em ambiente local que tenha esses arquivos.
 
 Essa bateria cobre caixas, fardos, bandeja, cartela, pacote ambiguo, kg, gramas, litro, ml como variante, cadastro incompleto, compra/venda com confirmacao, produto ambiguo, produto inexistente, despesa, perda, cancelamento, pergunta de estoque e resumo de lucro.
 
@@ -333,10 +329,9 @@ Para validar rapidamente contexto pendente, produto ambiguo e conversa humana se
 
 ```bash
 npx vitest run tests/ai/product-disambiguation.test.ts tests/ai/parse-message.test.ts
-npx playwright test tests/e2e/assistant-human-conversation.spec.ts
 ```
 
-O E2E cobre cadastro natural, produto incompleto, venda ambigua com resposta numerica, valor total/unitario e multiplas acoes sem persistencia.
+O E2E privado de conversa humana fica fora do GitHub; rode-o apenas em ambiente local que tenha esse arquivo.
 
 ## Audio e BetKol CPU
 
@@ -483,17 +478,7 @@ Resultado esperado:
 
 ## Laboratorio Conversacional Humano
 
-Unitario de corpus multi-negocio:
-
-```bash
-npx vitest run tests/ai/assistant-human-fuzz-corpus.test.ts
-```
-
-E2E de conversas completas:
-
-```bash
-npx playwright test tests/e2e/assistant-human-business-flow.spec.ts
-```
+As baterias privadas de corpus multi-negocio e conversas completas ficam fora do GitHub; rode-as apenas em ambiente local que tenha esses arquivos.
 
 E2E de unidades comerciais com banco vazio:
 

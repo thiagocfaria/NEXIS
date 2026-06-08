@@ -218,7 +218,7 @@ Esse reset e destrutivo e opera somente no SQLite local/demo. Depois dele o dash
 - `docs/PROJECT_STATE.md`: fonte de verdade do estado atual.
 - `docs/ARCHITECTURE_TREE.md`: arquitetura, arquivos centrais e limites.
 - `docs/AI_OPERATING_RULES.md`: regras obrigatorias de IA, voz e confirmacao.
-- `docs/ASSISTANT_INTELLIGENCE_CORPUS.md`: corpus de frases para parser, dialogo e E2E do assistant.
+- `private assistant corpus (not versioned)`: corpus de frases para parser, dialogo e E2E do assistant.
 - `docs/ACCEPTANCE_CRITERIA.md`: criterio de aceite do MVP atual e do MVP operacional.
 - `docs/ROADMAP.md`: etapas de correcao e evolucao para MVP funcional real.
 - `docs/RUNBOOK.md`: demo, ambiente, deploy/preview, IA externa e diagnosticos.

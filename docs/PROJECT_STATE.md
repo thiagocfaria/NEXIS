@@ -78,7 +78,7 @@ Funciona:
 - manter no `pendingContext` as opcoes de produto ambiguo com `id` e nome, tratando a proxima mensagem como escolha antes de nova classificacao;
 - continuar venda/compra ambigua com o produto escolhido por `id`, sem reabrir busca aproximada que possa repetir a mesma ambiguidade;
 - pedir numero quando a resposta textual ainda nao for segura, como `a lata` entre `Coca Cola lata` e `Coca Cola lata 350 ml`;
-- testar conversas humanas sequenciais em `tests/e2e/assistant-human-conversation.spec.ts`;
+- testar conversas humanas sequenciais em `private assistant conversation E2E (not versioned)`;
 - manter contexto curto no assistant para perguntar custo unitario, preco de venda e estoque minimo antes de montar rascunho;
 - bloquear frases com multiplas acoes misturadas, como `comprei coca, vendi agua e gastei 10`, pedindo uma acao por vez;
 - classificar confidence simples (`HIGH`, `MEDIUM`, `LOW`) para orientar rascunho, pergunta de campo faltante ou modo seguro;
@@ -237,8 +237,8 @@ Verificacao da rodada de compras, estoque inicial e cancelamento seguro em 2026-
 - IA externa opcional agora volta ao parser deterministico quando troca produto ou campos comerciais relevantes extraidos com seguranca;
 - `npx vitest run tests/products/create-product.test.ts tests/validation/purchase.test.ts tests/ai/external-assistant.test.ts`: passou com 3 arquivos e 31 testes;
 - `npm run typecheck`: passou;
-- `npx playwright test tests/e2e/manual-packaged-product.spec.ts tests/e2e/assistant-required-business-scenarios.spec.ts`: passou com 7 testes mobile Chromium;
-- `npx playwright test tests/e2e/ai-demo-flow.spec.ts tests/e2e/assistant-commercial-units.spec.ts tests/e2e/assistant-human-business-flow.spec.ts tests/e2e/assistant-human-conversation.spec.ts tests/e2e/text-only-demo.spec.ts`: passou com 30 testes mobile Chromium;
+- `npx playwright test tests/e2e/manual-packaged-product.spec.ts private assistant required scenarios E2E (not versioned)`: passou com 7 testes mobile Chromium;
+- `npx playwright test tests/e2e/ai-demo-flow.spec.ts tests/e2e/assistant-commercial-units.spec.ts private assistant business flow E2E (not versioned) private assistant conversation E2E (not versioned) tests/e2e/text-only-demo.spec.ts`: passou com 30 testes mobile Chromium;
 - `npm run verify`: passou; executou `lint`, `typecheck`, `test` com 33 arquivos e 481 testes, e `build`;
 - `npm run verify:e2e`: passou com 44 testes mobile Chromium;
 - `git diff --check`: passou.
@@ -252,7 +252,7 @@ Verificacao da rodada de cadastro de produto por formulario pre-preenchido em 20
 - `npx prisma validate`: passou;
 - `npx prisma generate`: passou e gerou Prisma Client v7.8.0;
 - `npm run typecheck`: passou;
-- `npx playwright test tests/e2e/ai-demo-flow.spec.ts tests/e2e/assistant-commercial-units.spec.ts tests/e2e/assistant-human-business-flow.spec.ts tests/e2e/assistant-human-conversation.spec.ts`: passou com 28 testes mobile Chromium;
+- `npx playwright test tests/e2e/ai-demo-flow.spec.ts tests/e2e/assistant-commercial-units.spec.ts private assistant business flow E2E (not versioned) private assistant conversation E2E (not versioned)`: passou com 28 testes mobile Chromium;
 - `npm run verify`: passou; executou `lint`, `typecheck`, `test` com 33 arquivos e 478 testes, e `build`;
 - `npm run verify:e2e`: passou com 42 testes mobile Chromium;
 - `git diff --check`: passou.
@@ -264,10 +264,10 @@ Verificacao da rodada de perda/cancelamento rastreavel em 2026-05-28:
 - relatorios determinismos de dashboard/perguntas ignoram venda, compra e despesa canceladas;
 - `npx prisma validate`: passou;
 - `npx prisma generate`: passou e gerou Prisma Client v7.8.0;
-- `npx vitest run tests/ai/assistant-required-business-scenarios.test.ts tests/validation/assistant-draft.test.ts`: passou com 2 arquivos e 23 testes;
-- `npx vitest run tests/ai/parse-message.test.ts tests/ai/assistant-required-business-scenarios.test.ts`: passou com 2 arquivos e 51 testes;
-- `npx vitest run tests/ai/assistant-required-business-scenarios.test.ts tests/validation/assistant-draft.test.ts tests/prisma-schema.test.ts tests/db/reset-empty.test.ts`: passou com 4 arquivos e 30 testes;
-- `npx playwright test tests/e2e/assistant-required-business-scenarios.spec.ts`: primeira execucao falhou por expectativa textual antiga do teste; apos ajuste, passou com 4 testes mobile Chromium;
+- `npx vitest run private assistant business scenario tests (not versioned) tests/validation/assistant-draft.test.ts`: passou com 2 arquivos e 23 testes;
+- `npx vitest run tests/ai/parse-message.test.ts private assistant business scenario tests (not versioned)`: passou com 2 arquivos e 51 testes;
+- `npx vitest run private assistant business scenario tests (not versioned) tests/validation/assistant-draft.test.ts tests/prisma-schema.test.ts tests/db/reset-empty.test.ts`: passou com 4 arquivos e 30 testes;
+- `npx playwright test private assistant required scenarios E2E (not versioned)`: primeira execucao falhou por expectativa textual antiga do teste; apos ajuste, passou com 4 testes mobile Chromium;
 - `npm run verify`: primeira execucao falhou porque testes antigos ainda esperavam bloqueio de perda/cancelamento; apos atualizar parser/testes para o novo fluxo rastreavel, passou `lint`, `typecheck`, `test` com 33 arquivos e 478 testes, e `build`;
 - `npm run verify:e2e`: primeira execucao falhou em 2 testes com expectativa antiga de bloqueio de cancelamento; apos ajuste, passou com 42 testes mobile Chromium;
 - `git diff --check`: passou;
@@ -277,11 +277,11 @@ Verificacao da rodada de invariantes e contexto pendente em 2026-05-28:
 
 - `REGRAS_INVARIANTES.md`: criado na raiz com regra central, bloqueios, invariantes financeiras, invariantes do assistant, implementacao e qualidade;
 - `AGENTS.md`: atualizado para exigir leitura de `REGRAS_INVARIANTES.md`, `docs/PROJECT_STATE.md`, `docs/AI_OPERATING_RULES.md` e `docs/ACCEPTANCE_CRITERIA.md` antes de alterar o projeto;
-- `tests/e2e/assistant-required-business-scenarios.spec.ts`: ampliado de 3 para 4 testes, cobrindo tambem frase baguncada, compra/cadastro incompleto, despesa, perda e cancelamento;
+- `private assistant required scenarios E2E (not versioned)`: ampliado de 3 para 4 testes, cobrindo tambem frase baguncada, compra/cadastro incompleto, despesa, perda e cancelamento;
 - primeira execucao do E2E ampliado revelou falha real: apos `comprei uma caixa com 12 coca lata 350 por 37 reais`, o contexto pendente de preco de venda consumia `gastei 37 reais com sacolinha e embalagem` como continuacao do produto e perguntava estoque minimo, em vez de abrir rascunho de despesa;
 - correcao aplicada em `app/assistant/actions.ts`: contexto pendente agora deixa uma nova intencao clara voltar ao parser normal; respostas curtas de custo continuam podendo completar custo pendente;
-- `npx vitest run tests/ai/assistant-required-business-scenarios.test.ts`: passou com 1 arquivo e 9 testes;
-- `npx playwright test tests/e2e/assistant-required-business-scenarios.spec.ts`: apos a correcao, passou com 4 testes mobile Chromium;
+- `npx vitest run private assistant business scenario tests (not versioned)`: passou com 1 arquivo e 9 testes;
+- `npx playwright test private assistant required scenarios E2E (not versioned)`: apos a correcao, passou com 4 testes mobile Chromium;
 - `npx prisma validate`: passou;
 - `npx prisma generate`: passou e gerou Prisma Client v7.8.0;
 - `npm run db:reset-demo`: passou, aplicou migrations e carregou seed ficticia com 4 produtos, 4 compras, 3 vendas e 4 despesas;
@@ -295,8 +295,8 @@ Verificacao da rodada de IA embarcada para cadastro, compra e venda em linguagem
 - `npm run dev -- --hostname 127.0.0.1 --port 3000`: iniciou localmente; `/` e `/assistant` responderam HTTP 200;
 - `npx prisma validate`: passou;
 - `npx prisma generate`: passou e gerou Prisma Client v7.8.0;
-- `npx playwright test tests/e2e/assistant-required-business-scenarios.spec.ts`: passou com 3 testes focados dos cenarios obrigatorios de conversa humana;
-- `npx playwright test tests/e2e/ai-demo-flow.spec.ts tests/e2e/assistant-human-conversation.spec.ts tests/e2e/text-only-demo.spec.ts`: passou com 17 testes apos ajuste de contexto pendente;
+- `npx playwright test private assistant required scenarios E2E (not versioned)`: passou com 3 testes focados dos cenarios obrigatorios de conversa humana;
+- `npx playwright test tests/e2e/ai-demo-flow.spec.ts private assistant conversation E2E (not versioned) tests/e2e/text-only-demo.spec.ts`: passou com 17 testes apos ajuste de contexto pendente;
 - `npm run verify`: passou; executou `lint`, `typecheck`, `test` com 33 arquivos e 476 testes, e `build`;
 - `npm run verify:e2e`: passou com 41 testes mobile Chromium;
 - `git diff --check`: passou;
@@ -342,7 +342,7 @@ Verificacao da inteligencia operacional do assistant em 2026-05-25:
 - prioridade de intencao impede que `quero lancar uma compra...` vire relatorio de compras;
 - `quero cadastrar a compra que fiz de 10 refrigerantes` nao vira relatorio de compras e pergunta campo faltante;
 - `comprei 5 refrigerantes por 20 reais total` converte deterministamente custo unitario para R$ 4,00;
-- corpus criado/reforcado em `docs/ASSISTANT_INTELLIGENCE_CORPUS.md` com 80 frases agrupadas por intencao e expectativa;
+- corpus criado/reforcado em `private assistant corpus (not versioned)` com 80 frases agrupadas por intencao e expectativa;
 - parser rule-based passou a entender custo unitario por `cada`, `cada uma`, `cada unidade`, `em cada`, `4,20 em cada`, `a X reais` e `por X a unidade`;
 - parser passou a reconhecer venda por `cliente levou 2 aguas` e `saiu uma coca 600`;
 - parser passou a tratar `comprei embalagem por 30` como despesa de embalagem, nao compra de estoque;
@@ -358,11 +358,11 @@ Verificacao da inteligencia operacional do assistant em 2026-05-25:
 - E2E cobre venda ambigua com resposta numerica `1` e resposta textual `coca lata`, baixando estoque somente apos `Confirmar venda`;
 - E2E cobre `comprei 5 coca por 20 reais` seguido de `total`;
 - E2E cobre frase real do print, bloqueio de relatorio indevido e multiplas acoes;
-- documentacao operacional criada em `docs/ASSISTANT_OPERATIONAL_KNOWLEDGE.md`.
-- `npx vitest run tests/ai/product-disambiguation.test.ts tests/ai/parse-message.test.ts tests/ai/conversation-engine-corpus.test.ts tests/ai/nexis-system-prompt.test.ts`: passou com 4 arquivos e 128 testes na auditoria de desambiguacao humana.
+- documentacao operacional criada em `private assistant operational notes (not versioned)`.
+- `npx vitest run tests/ai/product-disambiguation.test.ts tests/ai/parse-message.test.ts private conversation corpus tests (not versioned) tests/ai/nexis-system-prompt.test.ts`: passou com 4 arquivos e 128 testes na auditoria de desambiguacao humana.
 - `npx vitest run tests/ai/product-disambiguation.test.ts tests/ai/parse-message.test.ts`: passou com 2 arquivos e 40 testes apos reforco de seletores de produto ambiguo.
 - `npx playwright test tests/e2e/ai-demo-flow.spec.ts -g "continues a human sale|asks for product disambiguation"`: passou com 3 testes mobile Chromium na auditoria de desambiguacao humana.
-- `npx playwright test tests/e2e/assistant-human-conversation.spec.ts`: passou com 5 testes mobile Chromium cobrindo conversas humanas A-E.
+- `npx playwright test private assistant conversation E2E (not versioned)`: passou com 5 testes mobile Chromium cobrindo conversas humanas A-E.
 - `npm run test -- tests/ai/parse-message.test.ts tests/ai/external-assistant.test.ts tests/ai/nexis-system-prompt.test.ts tests/ai/provider.test.ts`: passou com 4 arquivos e 57 testes.
 - `npx playwright test tests/e2e/ai-demo-flow.spec.ts`: passou com 5 testes mobile Chromium.
 - `npx prisma validate`: passou.
@@ -386,7 +386,7 @@ Verificacao do parser de compras compostas em 2026-05-28:
 - campos ausentes em compra/cadastro continuam gerando `unknown` ou ambiguidade estruturada, sem inventar produto, quantidade, custo ou preco de venda;
 - busca final `rg` em `app` e `lib` para hardcodes como `coca`, `cocacola`, `queryHasCoca`, `canonicalizeKnownProductAlias` e `isCocaCola` nao encontrou ocorrencias;
 - `npm run test -- tests/ai/parse-message.test.ts`: passou com 1 arquivo e 41 testes apos o reforco dos casos de linguagem natural;
-- `npm run test -- tests/ai/parse-message.test.ts tests/ai/conversation-engine-corpus.test.ts tests/ai/assistant-human-fuzz-corpus.test.ts tests/ai/product-disambiguation.test.ts tests/ai/external-assistant.test.ts tests/ai/nexis-system-prompt.test.ts`: passou com 6 arquivos e 314 testes;
+- `npm run test -- tests/ai/parse-message.test.ts private conversation corpus tests (not versioned) private assistant fuzz tests (not versioned) tests/ai/product-disambiguation.test.ts tests/ai/external-assistant.test.ts tests/ai/nexis-system-prompt.test.ts`: passou com 6 arquivos e 314 testes;
 - `npm run verify`: passou; executou lint, typecheck, test com 32 arquivos/467 testes e build;
 - `npm run verify:e2e`: passou com 38 testes mobile Chromium;
 - `npm run ai:check-provider`: passou com `status: "passed"`, smoke test executado e sem imprimir chave;
@@ -926,7 +926,7 @@ Evidencias P0 desta rodada:
 - `docs/SENIOR_TOOLING_AUDIT.md`
 - `docs/SENIOR_READINESS_GAPS.md`
 - `docs/ASSISTANT_HUMAN_FUZZ_REPORT.md`
-- `docs/ASSISTANT_BUSINESS_SCENARIOS.md`
+- `private assistant business scenarios (not versioned)`
 
 Docs antigos de auditoria, planos executados, checklist duplicado, setup/deploy/demo isolados e auditorias de ambiente foram consolidados para reduzir ruido antes de enviar o estado para a equipe.
 
@@ -937,8 +937,8 @@ Data: 2026-05-25.
 Estado novo:
 
 - corpus documentado expandido para mais de 120 frases humanas variadas;
-- teste unitario `tests/ai/assistant-human-fuzz-corpus.test.ts` cobre 122 frases deterministicas;
-- E2E `tests/e2e/assistant-human-business-flow.spec.ts` cobre 7 conversas completas;
+- teste unitario `private assistant fuzz tests (not versioned)` cobre 122 frases deterministicas;
+- E2E `private assistant business flow E2E (not versioned)` cobre 7 conversas completas;
 - motor entende casos de espetinho, areia, cimento, agua ambigua, queijo kg, piso caixa, agro ficticio, produto sensivel ficticio, despesas e relatorios;
 - typos conservadores (`cadatra`, `conprei`, `vedi`, `pego`) foram normalizados;
 - servico sem estoque segue fora de escopo persistente e responde de forma segura;
@@ -947,8 +947,8 @@ Estado novo:
 
 Validacao direcionada ja executada nesta rodada:
 
-- `npx vitest run tests/ai/assistant-human-fuzz-corpus.test.ts`: passou com 132 testes.
-- `npx playwright test tests/e2e/assistant-human-business-flow.spec.ts`: passou com 7 testes mobile Chromium.
+- `npx vitest run private assistant fuzz tests (not versioned)`: passou com 132 testes.
+- `npx playwright test private assistant business flow E2E (not versioned)`: passou com 7 testes mobile Chromium.
 
 ## Atualizacao - Deploy Railway Demo
 
@@ -1055,7 +1055,7 @@ Estado novo:
 
 Validacao direcionada ja executada nesta rodada:
 
-- `npx vitest run tests/ai/parse-message.test.ts tests/ai/conversation-engine-corpus.test.ts tests/ai/assistant-human-fuzz-corpus.test.ts tests/validation/product.test.ts`: passou com 292 testes.
+- `npx vitest run tests/ai/parse-message.test.ts private conversation corpus tests (not versioned) private assistant fuzz tests (not versioned) tests/validation/product.test.ts`: passou com 292 testes.
 - `npm run typecheck`: passou na checagem intermediaria apos alinhar tipos de unidade.
 
 Validacao completa obrigatoria desta rodada:
@@ -1092,7 +1092,7 @@ Validacao direcionada e final desta rodada:
 
 - `npx vitest run tests/validation/product.test.ts tests/ai/parse-message.test.ts`: primeiro falhou porque `GRAM` ainda nao existia e porque `unidade grama` entrava no nome; depois passou com 2 arquivos e 47 testes.
 - `npx vitest run tests/ai/parse-message.test.ts`: primeiro falhou na inferencia por tipo comum de produto; depois passou com 38 testes.
-- `npx vitest run tests/ai/assistant-human-fuzz-corpus.test.ts`: depois de estreitar a inferencia de kg para nao classificar `espetinho de carne` como peso, passou com 158 testes.
+- `npx vitest run private assistant fuzz tests (not versioned)`: depois de estreitar a inferencia de kg para nao classificar `espetinho de carne` como peso, passou com 158 testes.
 - `npx prisma validate`: passou; schema valido.
 - `npx prisma generate`: passou; Prisma Client 7.8.0 gerado.
 - `npm run db:reset-empty`: passou; SQLite local recriado vazio.

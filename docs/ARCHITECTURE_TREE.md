@@ -100,8 +100,8 @@ Assistant/IA:
 - `components/assistant/answer-card.tsx`
 - `lib/ai/parse-message.ts`
 - `lib/ai/conversation-engine.ts`
-- `docs/ASSISTANT_OPERATIONAL_KNOWLEDGE.md`
-- `docs/ASSISTANT_INTELLIGENCE_CORPUS.md`
+- `private assistant operational notes (not versioned)`
+- `private assistant corpus (not versioned)`
 - `lib/ai/intent-schema.ts`
 - `lib/ai/answer-question.ts`
 - `lib/ai/external-assistant.ts`
@@ -109,11 +109,11 @@ Assistant/IA:
 - `lib/products/create-product.ts`
 - `lib/validation/assistant-draft.ts`
 - `tests/ai/parse-message.test.ts`
-- `tests/ai/assistant-required-business-scenarios.test.ts`
+- `private assistant business scenario tests (not versioned)`
 - `tests/ai/answer-question.test.ts`
 - `tests/ai/external-assistant.test.ts`
 - `tests/validation/assistant-draft.test.ts`
-- `tests/e2e/assistant-required-business-scenarios.spec.ts`
+- `private assistant required scenarios E2E (not versioned)`
 
 Audio/STT:
 
