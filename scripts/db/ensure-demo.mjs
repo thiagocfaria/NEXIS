@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Startup seguro para Railway: aplica migrations e carrega seed somente se vazio.
-// Nunca destrói dados existentes — seguro para reinicializacoes e volumes montados.
+// Nunca destrói dados existentes.
 
 import { mkdirSync } from "node:fs";
 import { spawnSync } from "node:child_process";
@@ -18,7 +18,7 @@ import {
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const databaseUrl = process.env.DATABASE_URL ?? "file:./dev.db";
-const npxCmd = process.platform === "win32" ? "npx.cmd" : "npx";
+const prismaCli = resolve(projectRoot, "node_modules/prisma/build/index.js");
 
 function resolveDbDir(url) {
   const filePath = url.slice("file:".length);
@@ -36,18 +36,20 @@ async function main() {
     return;
   }
 
-  // Cria diretório do banco se não existir (ex: /data no Railway)
   const dbDir = resolveDbDir(databaseUrl);
   mkdirSync(dbDir, { recursive: true });
   console.log(`[ensure-demo] Banco: ${databaseUrl}`);
 
-  // Aplica migrations pendentes — nunca destrói dados
   console.log("[ensure-demo] Aplicando migrations (migrate deploy)...");
-  const migrateResult = spawnSync(npxCmd, ["prisma", "migrate", "deploy"], {
+  const migrateResult = spawnSync(process.execPath, [prismaCli, "migrate", "deploy"], {
     cwd: projectRoot,
     env: { ...process.env, DATABASE_URL: databaseUrl },
     stdio: "inherit",
   });
+
+  if (migrateResult.error) {
+    console.error("[ensure-demo] Erro ao executar prisma migrate:", migrateResult.error.message);
+  }
 
   if (migrateResult.status !== 0) {
     console.error("[ensure-demo] Migrations falharam.");
@@ -66,7 +68,7 @@ async function main() {
       return;
     }
 
-    console.log("[ensure-demo] Banco vazio — carregando dados ficticios de demonstracao...");
+    console.log("[ensure-demo] Banco vazio - carregando dados ficticios de demonstracao...");
     await seedDemoData(prisma);
     console.log(
       `[ensure-demo] Seed concluida: ${demoProducts.length} produtos, ` +
@@ -178,7 +180,7 @@ function requireProduct(productsByKey, key) {
 function normalizeProductName(value) {
   return value
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/\p{M}/gu, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, " ")
     .replace(/\s+/g, " ")

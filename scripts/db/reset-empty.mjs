@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const databaseUrl = process.env.DATABASE_URL ?? "";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+const prismaCli = resolve(projectRoot, "node_modules/prisma/build/index.js");
 
 if (process.env.NEXIS_EMPTY_RESET !== "1") {
   console.error("Reset vazio bloqueado: execute via npm run db:reset-empty.");
@@ -28,8 +29,7 @@ if (process.env.NEXIS_EMPTY_RESET !== "1") {
     mkdirSync(dirname(databasePath), { recursive: true });
     removeSqliteFiles(databasePath);
 
-    const command = process.platform === "win32" ? "npx.cmd" : "npx";
-    const resetResult = spawnSync(command, ["prisma", "migrate", "deploy"], {
+    const resetResult = spawnSync(process.execPath, [prismaCli, "migrate", "deploy"], {
       cwd: projectRoot,
       env: {
         ...process.env,
@@ -37,6 +37,10 @@ if (process.env.NEXIS_EMPTY_RESET !== "1") {
       },
       stdio: "inherit",
     });
+
+    if (resetResult.error) {
+      console.error("Reset vazio bloqueado:", resetResult.error.message);
+    }
 
     if (resetResult.status === 0) {
       console.log("Reset vazio local concluido.");
